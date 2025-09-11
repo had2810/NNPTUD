@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CRUD Example</title>
+  </head>
+  <body onload="loadData()">
+    <h3>Thêm Post mới</h3>
+    <input type="text" id="id" placeholder="ID" />
+    <input type="text" id="title" placeholder="Title" />
+    <input type="number" id="view" placeholder="Views" />
+    <button onclick="saveData()">Save</button>
+
+    <h3>Danh sách Posts</h3>
+    <table border="1" cellpadding="6">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Title</td>
+          <td>Views</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody id="body"></tbody>
+    </table>
+
+    <script src="main.js"></script>
+  </body>
+</html>
