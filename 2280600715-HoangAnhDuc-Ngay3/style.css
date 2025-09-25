@@ -1,0 +1,53 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f9f9f9;
+}
+
+h1 {
+  color: #333;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+input,
+button {
+  padding: 8px;
+  margin: 5px;
+}
+
+#suggestions {
+  border: 1px solid #ccc;
+  background: white;
+  max-width: 300px;
+  position: absolute;
+  z-index: 10;
+}
+
+#suggestions div {
+  padding: 5px;
+  cursor: pointer;
+}
+
+#suggestions div:hover {
+  background: #eee;
+}
+
+.slider-container {
+  margin: 20px 0;
+}
+
+#postList {
+  list-style: none;
+  padding: 0;
+}
+
+#postList li {
+  background: white;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

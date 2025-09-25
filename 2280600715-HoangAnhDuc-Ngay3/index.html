@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Search & Filter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Danh sách Posts</h1>
+
+    <!-- Search -->
+    <div class="controls">
+      <input
+        type="text"
+        id="searchBox"
+        placeholder="Tìm theo title..."
+        autocomplete="off"
+      />
+      <div id="suggestions"></div>
+    </div>
+
+    <!-- Slider -->
+    <div class="slider-container">
+      <label>
+        Views từ: <span id="minVal">0</span> → <span id="maxVal">0</span>
+      </label>
+      <br />
+      <!-- bỏ min/max mặc định, JS sẽ set động -->
+      <input type="range" id="minSlider" />
+      <input type="range" id="maxSlider" />
+      <button id="filterBtn">Lọc</button>
+    </div>
+
+    <!-- List -->
+    <ul id="postList"></ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>
