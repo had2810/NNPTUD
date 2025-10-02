@@ -14,6 +14,6 @@ Viết thêm hàm delete đổi thuộc tính isDelete về true
   )
 
 
-  ngày 2/10 commit ( xong kiểm tra buổi 2 là bài kiểm tra )
+  ngày 2/10 commit ( xong kiểm tra 2/10  là bài kiểm tra )
 
 
