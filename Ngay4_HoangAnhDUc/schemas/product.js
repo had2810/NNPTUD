@@ -16,8 +16,9 @@ let schema = new mongoose.Schema(
       default: "good product",
     },
     category: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true, // 👈 bắt buộc
     },
     isDelete: {
       type: Boolean,
