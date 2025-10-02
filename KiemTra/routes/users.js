@@ -8,7 +8,19 @@ const Role = require("../schemas/role"); // Để kiểm tra role tồn tại
    ========================= */
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find({ isDelete: false }).populate("role");
+    let query = { isDelete: false };
+
+    // Thêm điều kiện tìm kiếm theo username nếu có trong query params
+    if (req.query.username) {
+      query.username = { $regex: req.query.username, $options: "i" };
+    }
+
+    // Thêm điều kiện tìm kiếm theo fullname nếu có trong query params
+    if (req.query.fullname) {
+      query.fullname = { $regex: req.query.fullname, $options: "i" };
+    }
+
+    const users = await User.find(query).populate("role");
     res.send({ success: true, data: users });
   } catch (error) {
     res.status(500).send({ success: false, error: error.message });
@@ -140,4 +152,53 @@ router.put("/:id/delete", async (req, res) => {
   }
 });
 
+router.post("/activate", async (req, res) => {
+  try {
+    // Lấy email và username từ body
+    const { email, username } = req.body;
+
+    // Kiểm tra các trường bắt buộc và định dạng
+    if (!email || !username) {
+      return res.status(400).send({
+        success: false,
+        message: "Email and username are required",
+      });
+    }
+
+    // Kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).send({
+        success: false,
+        message: "Invalid email format",
+      });
+    }
+
+    // Tìm user dựa trên email và username, chưa bị xóa
+    const user = await User.findOne({ email, username, isDelete: false });
+    if (!user) {
+      // Nếu không tìm thấy user, tạo một ObjectId ngẫu nhiên
+      const activateId = new mongoose.Types.ObjectId();
+      return res.status(404).send({
+        success: false,
+        message: "User not found with the provided email and username",
+        activateId: activateId, // Trả về ObjectId ngẫu nhiên
+      });
+    }
+
+    // Cập nhật status thành true
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
+      { $set: { status: true } },
+      { new: true, runValidators: true }
+    );
+
+    res.send({
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).send({ success: false, error: error.message });
+  }
+});
 module.exports = router;
